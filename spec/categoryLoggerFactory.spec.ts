@@ -134,7 +134,7 @@ describe("CategoryServiceFactory", () => {
     expect(settings.logFormat.showTimeStamp).toBeTruthy();
     expect(settings.logFormat.dateFormat.dateSeparator).toEqual("-");
     expect(settings.logFormat.dateFormat.formatEnum === DateFormatEnum.Default).toBeTruthy();
-    expect(settings.logLevel === LogLevel.Error).toBeTruthy();
+    expect(settings.logLevel === LogLevel.Warning).toBeTruthy();
     expect(settings.callBackLogger).toBeNull();
   };
 
@@ -262,7 +262,7 @@ describe("CategoryServiceFactory", () => {
       return msg.messageAsString + "_postFix";
     };
 
-    const configRoot2 = new CategoryConfiguration(LogLevel.Debug, LoggerType.MessageBuffer);
+    const configRoot2 = new CategoryConfiguration(LogLevel.Fine, LoggerType.MessageBuffer);
     configRoot2.formatterLogMessage = formatterRoot2;
 
     const root2 = new Category("root2");
@@ -274,7 +274,7 @@ describe("CategoryServiceFactory", () => {
     rootLogger.info("Hello root1!");
     rootLogger.info("Hello child1!", child1 as Category);
     const rootLogger2 = CategoryServiceFactory.getLogger(root2 as Category);
-    rootLogger2.debug("Hello root2!");
+    rootLogger2.fine("Hello root2!");
 
     expect(getBufferedMessages(rootLogger)).toEqual(["Hello root1!", "Hello child1!"]);
     expect(getBufferedMessages(rootLogger2)).toEqual(["Hello root2!_postFix"]);

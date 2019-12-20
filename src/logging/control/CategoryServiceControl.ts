@@ -24,7 +24,7 @@ export interface CategoryServiceControlSettings {
   /**
    * Set log level, undefined will not change the setting.
    */
-  logLevel: "Fatal" | "Error" | "Warn" | "Info" | "Debug" | "Trace" | undefined;
+  logLevel: "Severe" | "Warning" | "Info" | "Config" | "Fine" | "Finer" | "Finest" | undefined;
 
   /**
    * Set the log format, undefined will not change the setting.

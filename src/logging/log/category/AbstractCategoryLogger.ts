@@ -165,32 +165,36 @@ export abstract class AbstractCategoryLogger implements CategoryLogger {
     this.runtimeSettings = runtimeSettings;
   }
 
-  public trace(msg: MessageType, ...categories: Category[]): void {
-    this._log(LogLevel.Trace, msg, null, false, ...categories);
+  public finest(msg: MessageType, ...categories: Category[]): void {
+    this._log(LogLevel.Finest, msg, null, false, ...categories);
   }
 
-  public debug(msg: MessageType, ...categories: Category[]): void {
-    this._log(LogLevel.Debug, msg, null, false, ...categories);
+  public finer(msg: MessageType, ...categories: Category[]): void {
+    this._log(LogLevel.Finer, msg, null, false, ...categories);
+  }
+
+  public fine(msg: MessageType, ...categories: Category[]): void {
+    this._log(LogLevel.Fine, msg, null, false, ...categories);
+  }
+
+  public config(msg: MessageType, ...categories: Category[]): void {
+    this._log(LogLevel.Config, msg, null, false, ...categories);
   }
 
   public info(msg: MessageType, ...categories: Category[]): void {
     this._log(LogLevel.Info, msg, null, false, ...categories);
   }
 
-  public warn(msg: MessageType, ...categories: Category[]): void {
-    this._log(LogLevel.Warn, msg, null, false, ...categories);
+  public warning(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
+    this._log(LogLevel.Warning, msg, error, false, ...categories);
   }
 
-  public error(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
-    this._log(LogLevel.Error, msg, error, false, ...categories);
-  }
-
-  public fatal(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
-    this._log(LogLevel.Fatal, msg, error, false, ...categories);
+  public severe(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
+    this._log(LogLevel.Severe, msg, error, false, ...categories);
   }
 
   public resolved(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
-    this._log(LogLevel.Error, msg, error, true, ...categories);
+    this._log(LogLevel.Severe, msg, error, true, ...categories);
   }
 
   public log(level: LogLevel, msg: MessageType, error: ErrorType, ...categories: Category[]): void {

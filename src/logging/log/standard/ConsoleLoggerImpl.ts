@@ -27,11 +27,20 @@ export class ConsoleLoggerImpl extends AbstractLogger {
 
       /* tslint:disable:no-console */
       switch (logLevel) {
-        case LogLevel.Trace:
+        case LogLevel.Finest:
           // Do not try trace we don't want a stack
           break;
-        case LogLevel.Debug:
+        case LogLevel.Finer:
+          // Do not try trace we don't want a stack
+          break;
+        case LogLevel.Fine:
           // Don't try, too much differences of consoles.
+          break;
+        case LogLevel.Config:
+          if (console.info) {
+            console.info("CONFIG " + msg);
+            logged = true;
+          }
           break;
         case LogLevel.Info:
           if (console.info) {
@@ -39,14 +48,13 @@ export class ConsoleLoggerImpl extends AbstractLogger {
             logged = true;
           }
           break;
-        case LogLevel.Warn:
+        case LogLevel.Warning:
           if (console.warn) {
             console.warn(msg);
             logged = true;
           }
           break;
-        case LogLevel.Error:
-        case LogLevel.Fatal:
+        case LogLevel.Severe:
           if (console.error) {
             console.error(msg);
             logged = true;

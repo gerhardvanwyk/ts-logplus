@@ -3,12 +3,13 @@
  */
 export enum LogLevel {
 
-  Trace,
-  Debug,
+  Finest,
+  Finer,
+  Fine,
+  Config,
   Info,
-  Warn,
-  Error,
-  Fatal
+  Warning,
+  Severe
 }
 
 /* tslint:disable:no-namespace */
@@ -25,18 +26,20 @@ export namespace LogLevel {
     }
 
     switch (val.toLowerCase()) {
-      case "trace":
-        return LogLevel.Trace;
-      case "debug":
-        return LogLevel.Debug;
+      case "finest":
+        return LogLevel.Finest;
+      case "finer":
+        return LogLevel.Finer;
+      case "fine":
+        return LogLevel.Fine;
+      case "config":
+        return LogLevel.Config;
       case "info":
         return LogLevel.Info;
-      case "warn":
-        return LogLevel.Warn;
-      case "error":
-        return LogLevel.Error;
-      case "fatal":
-        return LogLevel.Fatal;
+      case "warning":
+        return LogLevel.Warning;
+      case "severe":
+        return LogLevel.Severe;
       default:
         throw new Error("Unsupported value for conversion: " + val);
     }

@@ -18,7 +18,7 @@ export class Category implements CategoryLogger {
   private _name: string;
   private _parent: Category | null;
   private _children: Category[] = [];
-  private _logLevel: LogLevel = LogLevel.Error;
+  private _logLevel: LogLevel = LogLevel.Warning;
 
   // Assigned lazily (on demand)
   private _logger!: CategoryLogger;
@@ -53,14 +53,24 @@ export class Category implements CategoryLogger {
     return this._logLevel;
   }
 
-  public trace(msg: MessageType, ...categories: Category[]): void {
+  public finest(msg: MessageType, ...categories: Category[]): void {
     this.loadCategoryLogger();
-    this._logger.trace(msg, ...categories);
+    this._logger.finest(msg, ...categories);
   }
 
-  public debug(msg: MessageType, ...categories: Category[]): void {
+  public finer(msg: MessageType, ...categories: Category[]): void {
     this.loadCategoryLogger();
-    this._logger.debug(msg, ...categories);
+    this._logger.finer(msg, ...categories);
+  }
+
+  public fine(msg: MessageType, ...categories: Category[]): void {
+    this.loadCategoryLogger();
+    this._logger.fine(msg, ...categories);
+  }
+
+  public config(msg: MessageType, ...categories: Category[]): void {
+    this.loadCategoryLogger();
+    this._logger.config(msg, ...categories);
   }
 
   public info(msg: MessageType, ...categories: Category[]): void {
@@ -68,19 +78,14 @@ export class Category implements CategoryLogger {
     this._logger.info(msg, ...categories);
   }
 
-  public warn(msg: MessageType, ...categories: Category[]): void {
+  public warning(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
     this.loadCategoryLogger();
-    this._logger.warn(msg, ...categories);
+    this._logger.warning(msg, error, ...categories);
   }
 
-  public error(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
+  public severe(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
     this.loadCategoryLogger();
-    this._logger.error(msg, error, ...categories);
-  }
-
-  public fatal(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
-    this.loadCategoryLogger();
-    this._logger.fatal(msg, error, ...categories);
+    this._logger.severe(msg, error, ...categories);
   }
 
   public resolved(msg: MessageType, error: ErrorType, ...categories: Category[]): void {
@@ -99,7 +104,6 @@ export class Category implements CategoryLogger {
 
     while (cat != null) {
       result = cat.name + "#" + result;
-
       cat = cat.parent;
     }
     return result;

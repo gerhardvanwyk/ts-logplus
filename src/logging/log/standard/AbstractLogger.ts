@@ -197,52 +197,60 @@ export abstract class AbstractLogger implements Logger {
     return this._name;
   }
 
-  public trace(msg: MessageType, error: ErrorType = null): void {
-    this._log(LogLevel.Trace, msg, error);
+  public finest(msg: MessageType, error: ErrorType = null): void {
+    this._log(LogLevel.Finest, msg, error);
   }
 
-  public debug(msg: MessageType, error: ErrorType = null): void {
-    this._log(LogLevel.Debug, msg, error);
+  public finer(msg: MessageType, error: ErrorType = null): void {
+    this._log(LogLevel.Finer, msg, error);
+  }
+
+  public fine(msg: MessageType, error: ErrorType = null): void {
+    this._log(LogLevel.Fine, msg, error);
+  }
+
+  public config(msg: MessageType, error: ErrorType = null): void {
+    this._log(LogLevel.Config, msg, error);
   }
 
   public info(msg: MessageType, error: ErrorType = null): void {
     this._log(LogLevel.Info, msg, error);
   }
 
-  public warn(msg: MessageType, error: ErrorType = null): void {
-    this._log(LogLevel.Warn, msg, error);
+  public warning(msg: MessageType, error: ErrorType = null): void {
+    this._log(LogLevel.Warning, msg, error);
   }
 
-  public error(msg: MessageType, error: ErrorType = null): void {
-    this._log(LogLevel.Error, msg, error);
+  public severe(msg: MessageType, error: ErrorType = null): void {
+    this._log(LogLevel.Severe, msg, error);
   }
 
-  public fatal(msg: MessageType, error: ErrorType = null): void {
-    this._log(LogLevel.Fatal, msg, error);
+  public isFinestEnabled(): boolean {
+    return this._logGroupRuntimeSettings.level === LogLevel.Finest;
   }
 
-  public isTraceEnabled(): boolean {
-    return this._logGroupRuntimeSettings.level === LogLevel.Trace;
+  public isFinerEnabled(): boolean {
+    return this._logGroupRuntimeSettings.level <= LogLevel.Finer;
   }
 
-  public isDebugEnabled(): boolean {
-    return this._logGroupRuntimeSettings.level <= LogLevel.Debug;
+  public isFineEnabled(): boolean {
+    return this._logGroupRuntimeSettings.level <= LogLevel.Fine;
+  }
+
+  public isConfigEnabled(): boolean {
+    return this._logGroupRuntimeSettings.level <= LogLevel.Config;
   }
 
   public isInfoEnabled(): boolean {
     return this._logGroupRuntimeSettings.level <= LogLevel.Info;
   }
 
-  public isWarnEnabled(): boolean {
-    return this._logGroupRuntimeSettings.level <= LogLevel.Warn;
+  public isWarningEnabled(): boolean {
+    return this._logGroupRuntimeSettings.level <= LogLevel.Warning;
   }
 
-  public isErrorEnabled(): boolean {
-    return this._logGroupRuntimeSettings.level <= LogLevel.Error;
-  }
-
-  public isFatalEnabled(): boolean {
-    return this._logGroupRuntimeSettings.level <= LogLevel.Fatal;
+  public isSevereEnabled(): boolean {
+    return this._logGroupRuntimeSettings.level <= LogLevel.Severe;
   }
 
   public getLogLevel(): LogLevel {

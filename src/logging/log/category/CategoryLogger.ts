@@ -10,17 +10,19 @@ import {Category} from "./Category";
  */
 export interface CategoryLogger {
 
-  trace(msg: MessageType, ...categories: Category[]): void;
+  finest(msg: MessageType, ...categories: Category[]): void;
 
-  debug(msg: MessageType, ...categories: Category[]): void;
+  finer(msg: MessageType, ...categories: Category[]): void;
+
+  fine(msg: MessageType, ...categories: Category[]): void;
+
+  config(msg: MessageType, ...categories: Category[]): void;
 
   info(msg: MessageType, ...categories: Category[]): void;
 
-  warn(msg: MessageType, ...categories: Category[]): void;
+  warning(msg: MessageType, error: ErrorType, ...categories: Category[]): void;
 
-  error(msg: MessageType, error: ErrorType, ...categories: Category[]): void;
-
-  fatal(msg: MessageType, error: ErrorType, ...categories: Category[]): void;
+  severe(msg: MessageType, error: ErrorType, ...categories: Category[]): void;
 
   /**
    * This is a special opinionated way to log, that an exception (Error)

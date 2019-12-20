@@ -22,28 +22,32 @@ export class CategoryDelegateLoggerImpl implements CategoryLogger {
     this._delegate = value;
   }
 
-  public trace(msg: MessageType, ...categories: Category[]): void {
-    this._delegate.trace(msg, ...categories);
+  public finest(msg: MessageType, ...categories: Category[]): void {
+    this._delegate.finest(msg, ...categories);
   }
 
-  public debug(msg: MessageType, ...categories: Category[]): void {
-    this._delegate.debug(msg, ...categories);
+  public finer(msg: MessageType, ...categories: Category[]): void {
+    this._delegate.finer(msg, ...categories);
+  }
+
+  public fine(msg: MessageType, ...categories: Category[]): void {
+    this._delegate.fine(msg, ...categories);
+  }
+
+  public config(msg: MessageType, ...categories: Category[]): void {
+    this._delegate.config(msg, ...categories);
   }
 
   public info(msg: MessageType, ...categories: Category[]): void {
     this._delegate.info(msg, ...categories);
   }
 
-  public warn(msg: MessageType, ...categories: Category[]): void {
-    this._delegate.warn(msg, ...categories);
+  public warning(msg: MessageType, error: Error, ...categories: Category[]): void {
+    this._delegate.warning(msg, error, ...categories);
   }
 
-  public error(msg: MessageType, error: Error, ...categories: Category[]): void {
-    this._delegate.error(msg, error, ...categories);
-  }
-
-  public fatal(msg: MessageType, error: Error, ...categories: Category[]): void {
-    this._delegate.fatal(msg, error, ...categories);
+  public severe(msg: MessageType, error: Error, ...categories: Category[]): void {
+    this._delegate.severe(msg, error, ...categories);
   }
 
   public resolved(msg: MessageType, error: Error, ...categories: Category[]): void {

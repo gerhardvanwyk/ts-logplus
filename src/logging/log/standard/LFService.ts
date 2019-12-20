@@ -180,7 +180,7 @@ export class LFService {
     if (LFService.DEFAULT_LOGGER_FACTORY === null) {
       LFService.DEFAULT_LOGGER_FACTORY = LFService.DEFAULT_LOGGER_FACTORY = LFService.INSTANCE_SERVICE.createNamedLoggerFactory(
         LFService.DEFAULT_LOGGER_FACTORY_NAME,
-        new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp(".+"), LogLevel.Error))
+        new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp(".+"), LogLevel.Severe))
       );
     }
     return LFService.DEFAULT_LOGGER_FACTORY;

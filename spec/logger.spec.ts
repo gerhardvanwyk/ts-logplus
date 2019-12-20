@@ -64,19 +64,19 @@ describe("Loggers", () => {
     expect(messages[0]).toContain("Dance!");
     expect(messages[0]).toContain("INFO");
 
-    logger.warn("This is a warning!");
+    logger.warning("This is a warning!");
 
     expect(messages.length).toEqual(2);
     expect(messages[1]).toContain("This is a warning!");
-    expect(messages[1]).toContain("WARN");
+    expect(messages[1]).toContain("WARNING");
 
     // Error stack is constructed async, hence we do this async in the test.
-    logger.error("Serious trouble!", new Error("Oops!"));
+    logger.severe("Serious trouble!", new Error("Oops!"));
 
     await waitForExpect(() => {
       expect(messages.length).toEqual(3);
       expect(messages[2]).toContain("Serious trouble!");
-      expect(messages[2]).toContain("ERROR");
+      expect(messages[2]).toContain("SEVERE");
       expect(messages[2]).toContain("Oops!");
     });
   });
@@ -118,11 +118,11 @@ describe("Loggers", () => {
     expect(logger.toString()).toContain("Hello");
 
     // Should not log!
-    logger.debug(() => "NotMe!");
+    logger.fine(() => "NotMe!");
     expect(logger.toString()).not.toContain("NotMe!");
 
     // Should log
-    logger.error(() => "YesMe!", () => new Error("Failed"));
+    logger.severe(() => "YesMe!", () => new Error("Failed"));
     await waitForExpect(() => {
       expect(logger.getMessages().length).toEqual(2);
       expect(logger.toString()).toContain("YesMe!");
@@ -188,22 +188,22 @@ describe("Loggers", () => {
   });
 
   it("Tests all log levels", async () => {
-    const loggerFactory = LFService.createLoggerFactory(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp(".+"), LogLevel.Trace, new LogFormat(), LoggerType.MessageBuffer)));
+    const loggerFactory = LFService.createLoggerFactory(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp(".+"), LogLevel.Finest, new LogFormat(), LoggerType.MessageBuffer)));
     const logger = loggerFactory.getLogger("ABC");
 
-    logger.trace("trace1");
-    logger.trace({msg: "trace2"});
-    logger.trace(() => "trace3");
-    logger.trace(() => ({msg: "trace4"}));
-    logger.trace(() => {
+    logger.finest("trace1");
+    logger.finest({msg: "trace2"});
+    logger.finest(() => "trace3");
+    logger.finest(() => ({msg: "trace4"}));
+    logger.finest(() => {
       return {msg: "trace5"};
     });
 
-    logger.debug("debug1");
-    logger.debug({msg: "debug2"});
-    logger.debug(() => "debug3");
-    logger.debug(() => ({msg: "debug4"}));
-    logger.debug(() => {
+    logger.fine("debug1");
+    logger.fine({msg: "debug2"});
+    logger.fine(() => "debug3");
+    logger.fine(() => ({msg: "debug4"}));
+    logger.fine(() => {
       return {msg: "debug5"};
     });
 
@@ -215,27 +215,27 @@ describe("Loggers", () => {
       return {msg: "info5"};
     });
 
-    logger.warn("warn1");
-    logger.warn({msg: "warn2"});
-    logger.warn(() => "warn3");
-    logger.warn(() => ({msg: "warn4"}));
-    logger.warn(() => {
+    logger.warning("warn1");
+    logger.warning({msg: "warn2"});
+    logger.warning(() => "warn3");
+    logger.warning(() => ({msg: "warn4"}));
+    logger.warning(() => {
       return {msg: "warn5"};
     });
 
-    logger.error("error1", new Error("errorex1"));
-    logger.error({msg: "error2"}, new Error("errorex2"));
-    logger.error(() => "error3", () => new Error("errorex3"));
-    logger.error(() => ({msg: "error4"}), () => new Error("errorex4"));
-    logger.error(() => {
+    logger.severe("error1", new Error("errorex1"));
+    logger.severe({msg: "error2"}, new Error("errorex2"));
+    logger.severe(() => "error3", () => new Error("errorex3"));
+    logger.severe(() => ({msg: "error4"}), () => new Error("errorex4"));
+    logger.severe(() => {
       return {msg: "error5"};
     }, () => new Error("errorex5"));
 
-    logger.fatal("fatal1", new Error("fatalex1"));
-    logger.fatal({msg: "fatal2"}, new Error("fatalex2"));
-    logger.fatal(() => "fatal3", () => new Error("fatalex3"));
-    logger.fatal(() => ({msg: "fatal4"}), () => new Error("fatalex4"));
-    logger.fatal(() => {
+    logger.severe("fatal1", new Error("fatalex1"));
+    logger.severe({msg: "fatal2"}, new Error("fatalex2"));
+    logger.severe(() => "fatal3", () => new Error("fatalex3"));
+    logger.severe(() => ({msg: "fatal4"}), () => new Error("fatalex4"));
+    logger.severe(() => {
       return {msg: "fatal5"};
     }, () => new Error("fatalex5"));
 
@@ -294,18 +294,18 @@ describe("Loggers", () => {
   });
 
   it("Test we do not bail on invalid error object", async () => {
-    const loggerFactory = LFService.createLoggerFactory(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp(".+"), LogLevel.Trace, new LogFormat(), LoggerType.MessageBuffer)));
+    const loggerFactory = LFService.createLoggerFactory(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp(".+"), LogLevel.Finest, new LogFormat(), LoggerType.MessageBuffer)));
     const logger = loggerFactory.getLogger("x");
 
     // Invalid error passsed in, this case a literal object. We should not bail out.
     const invalidError = { invalid : "bla" };
-    logger.error("Failed1", invalidError as any);
+    logger.severe("Failed1", invalidError as any);
 
     // Next invalid error, but cannot be stringified either. We should not bail out.
     const anotherInvalidError = new InvalidError();
     anotherInvalidError.setSelf(anotherInvalidError);
 
-    logger.error("Failed2", anotherInvalidError as any);
+    logger.severe("Failed2", anotherInvalidError as any);
 
     const messages = getMessages(logger);
     await waitForExpect(() => {

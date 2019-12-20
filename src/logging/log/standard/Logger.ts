@@ -46,29 +46,33 @@ export interface Logger {
    */
   readonly name: string;
 
-  trace(msg: MessageType, error?: ErrorType): void;
+  finest(msg: MessageType, error?: ErrorType): void;
 
-  debug(msg: MessageType, error?: ErrorType): void;
+  finer(msg: MessageType, error?: ErrorType): void;
+
+  fine(msg: MessageType, error?: ErrorType): void;
+
+  config(msg: MessageType, error?: ErrorType): void;
 
   info(msg: MessageType, error?: ErrorType): void;
 
-  warn(msg: MessageType, error?: ErrorType): void;
+  warning(msg: MessageType, error?: ErrorType): void;
 
-  error(msg: MessageType, error?: ErrorType): void;
+  severe(msg: MessageType, error?: ErrorType): void;
 
-  fatal(msg: MessageType, error?: ErrorType): void;
+  isFinestEnabled(): boolean;
 
-  isTraceEnabled(): boolean;
+  isFinerEnabled(): boolean;
 
-  isDebugEnabled(): boolean;
+  isFineEnabled(): boolean;
+
+  isConfigEnabled(): boolean;
 
   isInfoEnabled(): boolean;
 
-  isWarnEnabled(): boolean;
+  isWarningEnabled(): boolean;
 
-  isErrorEnabled(): boolean;
-
-  isFatalEnabled(): boolean;
+  isSevereEnabled(): boolean;
 
   /**
    * LogLevel for this Logger.

@@ -17,21 +17,21 @@ describe("Logging by Category...", () => {
 
   beforeEach(() => {
     CategoryServiceFactory.clear();
-    CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Error, LoggerType.MessageBuffer));
+    CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Severe, LoggerType.MessageBuffer));
   });
 
   it("Can log root category (to error)", () => {
     const cat = new Category("root");
-    cat.error("Error", null);
+    cat.severe("Severe", null);
 
-    expect(getMessagesAsString(cat)).toContain("Error");
+    expect(getMessagesAsString(cat)).toContain("Severe");
   });
 
   it("Can log child category (to error)", () => {
     const catChild = new Category("child", new Category("root"));
-    catChild.error("Error", null);
+    catChild.severe("Severe", null);
 
-    expect(getMessagesAsString(catChild)).toContain("Error");
+    expect(getMessagesAsString(catChild)).toContain("Severe");
   });
 
 });

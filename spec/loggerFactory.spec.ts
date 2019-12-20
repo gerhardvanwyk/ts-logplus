@@ -21,25 +21,23 @@ describe("LoggerFactory configuration", () => {
 
     const myLogger = factory.getLogger("MyLogger");
 
-    expect(myLogger.isTraceEnabled()).toBeFalsy();
-    expect(myLogger.isDebugEnabled()).toBeFalsy();
+    expect(myLogger.isFinestEnabled()).toBeFalsy();
+    expect(myLogger.isFineEnabled()).toBeFalsy();
     expect(myLogger.isInfoEnabled()).toBeTruthy();
-    expect(myLogger.isWarnEnabled()).toBeTruthy();
-    expect(myLogger.isErrorEnabled()).toBeTruthy();
-    expect(myLogger.isFatalEnabled()).toBeTruthy();
+    expect(myLogger.isWarningEnabled()).toBeTruthy();
+    expect(myLogger.isSevereEnabled()).toBeTruthy();
   });
 
   it("Testing custom configuration", () => {
-    const factory = LFService.createLoggerFactory(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp("ExactName"), LogLevel.Error)));
+    const factory = LFService.createLoggerFactory(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp("ExactName"), LogLevel.Severe)));
     expect(factory.isEnabled()).toBeTruthy();
 
     const myLogger = factory.getLogger("ExactName");
-    expect(myLogger.isTraceEnabled()).toBeFalsy();
-    expect(myLogger.isDebugEnabled()).toBeFalsy();
+    expect(myLogger.isFinestEnabled()).toBeFalsy();
+    expect(myLogger.isFineEnabled()).toBeFalsy();
     expect(myLogger.isInfoEnabled()).toBeFalsy();
-    expect(myLogger.isWarnEnabled()).toBeFalsy();
-    expect(myLogger.isErrorEnabled()).toBeTruthy();
-    expect(myLogger.isFatalEnabled()).toBeTruthy();
+    expect(myLogger.isWarningEnabled()).toBeFalsy();
+    expect(myLogger.isSevereEnabled()).toBeTruthy();
 
     expect(() => factory.getLogger("NotSet")).toThrow();
   });
@@ -52,26 +50,24 @@ describe("LoggerFactory configuration", () => {
 
   it("Testing reconfigure", () => {
     const checkModelLogger = (logger: Logger): void => {
-      expect(logger.isTraceEnabled()).toBeFalsy();
-      expect(logger.isDebugEnabled()).toBeFalsy();
+      expect(logger.isFinestEnabled()).toBeFalsy();
+      expect(logger.isFineEnabled()).toBeFalsy();
       expect(logger.isInfoEnabled()).toBeFalsy();
-      expect(logger.isWarnEnabled()).toBeTruthy();
-      expect(logger.isErrorEnabled()).toBeTruthy();
-      expect(logger.isFatalEnabled()).toBeTruthy();
+      expect(logger.isWarningEnabled()).toBeTruthy();
+      expect(logger.isSevereEnabled()).toBeTruthy();
     };
 
     const checkServiceLogger = (logger: Logger): void => {
-      expect(logger.isTraceEnabled()).toBeFalsy();
-      expect(logger.isDebugEnabled()).toBeFalsy();
+      expect(logger.isFinestEnabled()).toBeFalsy();
+      expect(logger.isFineEnabled()).toBeFalsy();
       expect(logger.isInfoEnabled()).toBeTruthy();
-      expect(logger.isWarnEnabled()).toBeTruthy();
-      expect(logger.isErrorEnabled()).toBeTruthy();
-      expect(logger.isFatalEnabled()).toBeTruthy();
+      expect(logger.isWarningEnabled()).toBeTruthy();
+      expect(logger.isSevereEnabled()).toBeTruthy();
     };
 
     const factory = LFService.createLoggerFactory();
     factory.configure(new LoggerFactoryOptions()
-                       .addLogGroupRule(new LogGroupRule(new RegExp("model\\..+"), LogLevel.Warn))
+                       .addLogGroupRule(new LogGroupRule(new RegExp("model\\..+"), LogLevel.Warning))
                        .addLogGroupRule(new LogGroupRule(new RegExp("service\\..+"), LogLevel.Info)));
     const logModel1 = factory.getLogger("model.Test");
     checkModelLogger(logModel1);
@@ -89,7 +85,7 @@ describe("LoggerFactory configuration", () => {
   it("Testing LogGroupRule related runtime settings", () => {
     const factory = LFService.createLoggerFactory() as LoggerFactoryImpl;
     expect(factory.getName()).toEqual("LoggerFactory1");
-    factory.configure(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp("model\\..+"), LogLevel.Warn)));
+    factory.configure(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp("model\\..+"), LogLevel.Warning)));
 
     const loggerHello = factory.getLogger("model.Hello");
     expect(loggerHello).not.toBeNull();
@@ -97,7 +93,7 @@ describe("LoggerFactory configuration", () => {
     const rtSettings = factory.getLogGroupRuntimeSettingsByLoggerName(loggerHello.name) as LogGroupRuntimeSettings;
     expect(rtSettings).not.toBeNull();
     expect(rtSettings).not.toBeNull();
-    expect(rtSettings.level).toEqual(LogLevel.Warn);
+    expect(rtSettings.level).toEqual(LogLevel.Warning);
 
     const notExists = factory.getLogGroupRuntimeSettingsByLoggerName("nonsense");
     expect(notExists).toBeNull();
@@ -132,9 +128,9 @@ describe("LoggerFactory configuration", () => {
     expect(LFService.DEFAULT).not.toBeNull();
     const factory = LFService.DEFAULT;
     expect(factory === LFService.DEFAULT).toBeTruthy();
-    factory.configure(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp(".+"), LogLevel.Warn, new LogFormat(), LoggerType.MessageBuffer)));
+    factory.configure(new LoggerFactoryOptions().addLogGroupRule(new LogGroupRule(new RegExp(".+"), LogLevel.Warning, new LogFormat(), LoggerType.MessageBuffer)));
     const logger = factory.getLogger("test") as MessageBufferLoggerImpl;
-    logger.warn("hello!");
+    logger.warning("hello!");
     expect(logger.toString()).toContain("hello!");
   });
 

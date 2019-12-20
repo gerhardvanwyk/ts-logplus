@@ -20,13 +20,13 @@ export class CategoryConfiguration {
 
   /**
    * Create a new instance
-   * @param logLevel Log level for all loggers, default is LogLevel.Error
+   * @param logLevel Log level for all loggers, default is LogLevel.Warning
    * @param loggerType Where to log, default is LoggerType.Console
    * @param logFormat What logging format to use, use default instance, for default values see CategoryLogFormat.
    * @param callBackLogger Optional callback, if LoggerType.Custom is used as loggerType. In that case must return a new Logger instance.
    *            It is recommended to extend AbstractCategoryLogger to make your custom logger.
    */
-  constructor(logLevel: LogLevel = LogLevel.Error, loggerType: LoggerType = LoggerType.Console,
+  constructor(logLevel: LogLevel = LogLevel.Warning, loggerType: LoggerType = LoggerType.Console,
               logFormat: CategoryLogFormat = new CategoryLogFormat(),
               callBackLogger: ((rootCategory: Category, runtimeSettings: RuntimeSettings) => CategoryLogger) | null = null) {
     this._logLevel = logLevel;

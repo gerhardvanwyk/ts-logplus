@@ -21,7 +21,7 @@ export interface LogGroupControlSettings {
   /**
    * Set log level, undefined will not change the setting.
    */
-  logLevel: "Fatal" | "Error" | "Warn" | "Info" | "Debug" | "Trace" | undefined;
+  logLevel: "Severe" | "Warning" | "Info" | "Config" | "Fine" | "Finer" | "Finest" |  undefined;
 
   /**
    * Set the log format, undefined will not change the setting.
@@ -269,10 +269,10 @@ class LoggerFactoryControlImpl implements LoggerFactoryControl {
     change({group: "all", logLevel: "Info"})
       ** Change loglevel to Info for all groups.
 
-    change({group: 1, recursive:false, logLevel: "Warn"})
+    change({group: 1, recursive:false, logLevel: "Warning"})
       ** Change logLevel for group 1 to Warn.
 
-    change({group: "all", logLevel: "Debug", logFormat: "YearDayMonthTime", showTimestamp:false, showLoggerName:false})
+    change({group: "all", logLevel: "Fine", logFormat: "YearDayMonthTime", showTimestamp:false, showLoggerName:false})
       ** Change loglevel to Debug for all groups, apply format, do not show timestamp and logger names.
 `;
 

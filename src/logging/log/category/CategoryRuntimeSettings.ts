@@ -17,7 +17,7 @@ export class CategoryRuntimeSettings {
   private _callBackLogger: ((rootCategory: Category, runtimeSettings: RuntimeSettings) => CategoryLogger) | null;
   private _formatterLogMessage: ((message: CategoryLogMessage) => string) | null = null;
 
-  constructor(category: Category, logLevel: LogLevel = LogLevel.Error, loggerType: LoggerType = LoggerType.Console,
+  constructor(category: Category, logLevel: LogLevel = LogLevel.Warning, loggerType: LoggerType = LoggerType.Console,
               logFormat: CategoryLogFormat = new CategoryLogFormat(),
               callBackLogger: ((rootCategory: Category, runtimeSettings: RuntimeSettings) => CategoryLogger) | null = null,
               formatterLogMessage: ((message: CategoryLogMessage) => string) | null = null) {
