@@ -10,7 +10,7 @@ const loggerFactory = LFService.createLoggerFactory();
 
 // Get a logger called "Hello"
 const loggerOld = loggerFactory.getLogger("Hello");
-loggerOld.error("Log4j on error", new Error("log4j error"));
+loggerOld.severe("Log4j on error", new Error("log4j error"));
 
 CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Debug));
 
@@ -23,12 +23,12 @@ const r2child11 = new Category("r2child1-1", r2Child1);
 const r2Child2 = new Category("r2child2", catRoot2);
 
 const logger = CategoryServiceFactory.getLogger(catRoot1);
-logger.error("Error in normal console", new Error("fail"), catRoot1);
-logger.debug("This is on debug");
+logger.severe("Error in normal console", new Error("fail"), catRoot1);
+logger.fine("This is on debug");
 
 const logger2 = CategoryServiceFactory.getLogger(catRoot2);
-logger2.error(function() { return "failed"; }, function() { return new Error("oops"); });
-logger2.debug(function() { return "category on debug"; });
+logger2.severe(function() { return "failed"; }, function() { return new Error("oops"); });
+logger2.fine(function() { return "category on debug"; });
 
 /*
 CategoryServiceFactory.setDefaultConfiguration(new CategoryConfiguration(LogLevel.Debug));

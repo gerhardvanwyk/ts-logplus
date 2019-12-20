@@ -37,7 +37,7 @@ const getMessages = (logger: CategoryLogger | Category): string[] => {
   return (actualLogger as CategoryMessageBufferLoggerImpl).getMessages();
 };
 
-const timeout = 90000
+const timeout = 90000;
 
 const logsErrorLevels = async (logger: CategoryLogger | Category) => {
   logger.warning("warning1", new Error("warningex1"));
