@@ -1,5 +1,10 @@
 # typescript-logging
 
+
+* Forked https://github.com/mreuvers/typescript-logging
+* Changed the log levels to Finest, Finer, Fine, Config, Infom, Warning, Severe
+
+
 TypeScript library for logging. Simple and flexible in usage.
 
 * The library is written in TypeScript, so it will easily integrate with other TypeScript projects.
