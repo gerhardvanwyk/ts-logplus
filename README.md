@@ -140,11 +140,11 @@ const logOther = factory.getLogger("somethingElse");
 export class ElseWhere {
 
   magic(name: string): void {
-    log.debug("Casting debug magic spell: " + name);
+    log.fine("Casting debug magic spell: " + name);
     logOther.info("Casting info magic spell: " + name);
 
     // Lamda logging, cheaper as its only executed when needed.
-    log.debug(() => "Casting lambda debug magic spell: " + name);
+    log.fine(() => "Casting lambda debug magic spell: " + name);
     logOther.info(() => "Casting lambda info magic spell: " + name);
 
     // Use template script
@@ -155,9 +155,9 @@ export class ElseWhere {
 
 When the method magic("Lumina") is called on an ElseWhere instance, it will log:
 ```
-2017-02-15 20:43:52,807 DEBUG [model.Product] Casting debug magic spell: Lumina
+2017-02-15 20:43:52,807 FINE [model.Product] Casting debug magic spell: Lumina
 2017-02-15 20:43:52,809 INFO [somethingElse] Casting info magic spell: Lumina
-2017-02-15 20:43:52,810 DEBUG [model.Product] Casting lambda debug magic spell: Lumina
+2017-02-15 20:43:52,810 FINE [model.Product] Casting lambda debug magic spell: Lumina
 2017-02-15 20:43:52,811 INFO [somethingElse] Casting lambda info magic spell: Lumina
 2017-02-15 20:43:52,812 INFO [model.Product] Casting magic spell: Lumina
 ```
