@@ -5,7 +5,7 @@
   "main": "dist/bundle/typescript-logging.js",
   "module": "dist/bundle/typescript-logging.esm.js",
   "browser": "dist/bundle/typescript-logging.browser.js",
-  "typings": "dist/bundle/scr/logging/typescript-logging.d.ts",
+  "typings": "dist/bundle/src/logging/typescript-logging.ts",
   "scripts": {
     "clean": "del-cli ./dist",
     "compile": "rollup -c",
