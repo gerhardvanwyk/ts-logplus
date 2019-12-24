@@ -3,7 +3,7 @@ node_modules
 npm-debug.log
 
 # Exclude dist for git
-
+dist/bundle/spec/
 
 # Rollup cache
 .rpt2_cache
