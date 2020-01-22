@@ -1,4 +1,4 @@
-# typescript-logging
+# ts-logging
 
 
 * **Forked https://github.com/mreuvers/typescript-logging**
