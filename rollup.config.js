@@ -56,7 +56,7 @@ const plugins = [
 ];
 
 export default {
-  input: "src/logging/typescript-logging.ts",
+  input: "src/logging/ts-logplus.ts",
   output,
   plugins,
   // Disable, or watch only works once funnily enough. With this set it does work.

@@ -3,7 +3,7 @@
 // This test assures things load (if not, it fails and the build will fail).
 
 // Note this module is transpiled to commonjs.
-const { LFService, CategoryServiceFactory, CategoryConfiguration, LogLevel, Category } = require("../dist/bundle/typescript-logging.js");
+const { LFService, CategoryServiceFactory, CategoryConfiguration, LogLevel, Category } = require("../dist/bundle/ts-logplus.js");
 
 // Create default logger
 const loggerFactory = LFService.createLoggerFactory();

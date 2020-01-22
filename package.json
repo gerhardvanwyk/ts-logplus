@@ -1,11 +1,11 @@
 {
-  "name": "typescript-logging",
-  "version": "0.7.0",
+  "name": "ts-logplus",
+  "version": "0.7.3",
   "description": "Library for logging, written in typescript. Only slight changes from https://github.com/mreuvers/typescript-logging",
-  "main": "dist/bundle/typescript-logging.js",
-  "module": "dist/bundle/typescript-logging.esm.js",
-  "browser": "dist/bundle/typescript-logging.browser.js",
-  "typings": "dist/bundle/src/logging/typescript-logging.ts",
+  "main": "dist/bundle/ts-logplus.js",
+  "module": "dist/bundle/ts-logplus.esm.js",
+  "browser": "dist/bundle/ts-logplus.browser.js",
+  "typings": "dist/bundle/src/logging/ts-logplus.ts",
   "scripts": {
     "clean": "del-cli ./dist",
     "compile": "rollup -c",
@@ -16,7 +16,7 @@
     "test-bundle": "node spec/testLoadUseBundle.js",
     "bundle-browser": "cross-env BUNDLE_BROWSER=true rollup -c",
     "build": "npm run compile && npm run bundle-browser && npm run test && npm run tslint",
-    "docs": "typedoc --tsconfig tsconfig-docs.json --excludeNotExported --excludePrivate --mode modules --out dist/bundle/docs/api src/logging/typescript-logging.ts && showdown makehtml -i docs/latest_log4j.md -o dist/bundle/docs/index_log4j.html && showdown makehtml -i docs/latest_categorized.md -o dist/bundle/docs/index_categorized.html && node scripts/process-docs.js dist/bundle",
+    "docs": "typedoc --tsconfig tsconfig-docs.json --excludeNotExported --excludePrivate --mode modules --out dist/bundle/docs/api src/logging/ts-logplus.ts && showdown makehtml -i docs/latest_log4j.md -o dist/bundle/docs/index_log4j.html && showdown makehtml -i docs/latest_categorized.md -o dist/bundle/docs/index_categorized.html && node scripts/process-docs.js dist/bundle",
     "release": "npm run clean && npm run build && npm run test-bundle && npm run docs && del-cli ./dist/bundle/spec"
   },
   "files": [
@@ -29,10 +29,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/gerhardvanwyk/typescript-logging.git"
+    "url": "git://github.com/gerhardvanwyk/ts-logplus.git"
   },
   "keywords": [
-    "typescript-logging",
+    "typescript",
     "logging",
     "log",
     "logger"
@@ -40,9 +40,9 @@
   "author": "Gerhard van Wyk <gerhardwyk@gmail.com forked  martijnr.work@gmail.com (http://www.javalid.org)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/gerhardvanwyk/typescript-logging/issues"
+    "url": "https://github.com/gerhardvanwyk/ts-logplus/issues"
   },
-  "homepage": "https://github.com/gerhardvanwyk/typescript-logging#readme",
+  "homepage": "https://github.com/gerhardvanwyk/ts-logplusg#readme",
   "devDependencies": {
     "@types/jest": "24.0.11",
     "@types/stacktrace-js": "0.0.32",
