@@ -40,7 +40,7 @@ Notes:
 Use npm to install for usage in your project.
 
 ```bash
-npm install --save typescript-logging
+npm install --save ts-logplus
 ```
 No additional typings are required, these are included.
 
