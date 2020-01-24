@@ -7,7 +7,7 @@
 
 TypeScript library for logging. Simple and flexible in usage.
 
-* The library is written in <span style="color:blue"/> TypeScript, so it will easily integrate with other TypeScript projects.
+* The library is written in TypeScript, so it will easily integrate with other TypeScript projects.
 * Two styles are supported (either can be used or both):
   * Category style of logging
   * Log4j style of logging
